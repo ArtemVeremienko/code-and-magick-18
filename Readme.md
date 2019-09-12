@@ -1,7 +1,7 @@
 # Учебный проект «Код и Магия» [![Build status][travis-image]][travis-url]
 
 * Студент: [Артём Веремеенко](https://github.com/ArtemVeremienko).
-* Наставник: `Неизвестно`.
+* Наставник: [HTML Academy](https://github.com/htmlacademy-javascript).
 
 ---
 
