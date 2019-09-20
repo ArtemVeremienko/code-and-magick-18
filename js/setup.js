@@ -4,6 +4,7 @@ var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'К
 var WIZARD_SURNAME = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var WIZARD_COAT_COLOR = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var WIZARD_EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
+var FIREBALL_BACKGROUND = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
 
@@ -70,6 +71,7 @@ var userNameInput = setup.querySelector('.setup-user-name');
 var setupWizard = setup.querySelector('.setup-wizard-appearance');
 var setupWizardCoat = setupWizard.querySelector('.wizard-coat');
 var setupWizardEyes = setupWizard.querySelector('.wizard-eyes');
+var setupFireball = setup.querySelector('.setup-fireball-wrap');
 
 var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE && evt.target !== userNameInput) {
@@ -161,4 +163,10 @@ setupWizardCoat.addEventListener('click', function () {
 // меняется по нажатию на блок .setup-wizard .wizard-eyes.
 setupWizardEyes.addEventListener('click', function () {
   setupWizardEyes.style.fill = getRandomElement(WIZARD_EYES_COLOR);
+});
+
+// 5.  Изменение цвета фаерболов по нажатию. Цвет задаётся через
+// изменение фона у блока .setup-fireball-wrap.
+setupFireball.addEventListener('click', function () {
+  setupFireball.style.background = getRandomElement(FIREBALL_BACKGROUND);
 });
