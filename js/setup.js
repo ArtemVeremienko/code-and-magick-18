@@ -13,6 +13,7 @@ var userDialog = document.querySelector('.setup');
 var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
+// Получение случайного элемента из массива
 var getRandomElement = function (array) {
   var randomElement = array[Math.floor(array.length * Math.random())];
   return randomElement;
@@ -66,12 +67,14 @@ var setupOpen = document.querySelector('.setup-open');
 var setup = document.querySelector('.setup');
 var setupClose = setup.querySelector('.setup-close');
 var userNameInput = setup.querySelector('.setup-user-name');
+var setupWizard = setup.querySelector('.setup-wizard-appearance');
+var setupWizardCoat = setupWizard.querySelector('.wizard-coat');
 
 var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE && evt.target !== userNameInput) {
     closePopup();
   }
-}
+};
 
 var openPopup = function () {
   setup.classList.remove('hidden');
@@ -144,4 +147,11 @@ userNameInput.addEventListener('input', function (evt) {
   } else {
     target.setCustomValidity('');
   }
+});
+
+// 3. Изменение цвета мантии персонажа по нажатию. Цвет мантии setup-wizard-appearance
+// .wizard-coat должен обновляться по нажатию на неё. Цвет мантии задаётся через
+// изменение инлайнового CSS-свойства fill для элемента.
+setupWizardCoat.addEventListener('click', function () {
+  setupWizardCoat.style.fill = getRandomElement(WIZARD_COAT_COLOR);
 });
