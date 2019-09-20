@@ -69,6 +69,7 @@ var setupClose = setup.querySelector('.setup-close');
 var userNameInput = setup.querySelector('.setup-user-name');
 var setupWizard = setup.querySelector('.setup-wizard-appearance');
 var setupWizardCoat = setupWizard.querySelector('.wizard-coat');
+var setupWizardEyes = setupWizard.querySelector('.wizard-eyes');
 
 var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE && evt.target !== userNameInput) {
@@ -154,4 +155,10 @@ userNameInput.addEventListener('input', function (evt) {
 // изменение инлайнового CSS-свойства fill для элемента.
 setupWizardCoat.addEventListener('click', function () {
   setupWizardCoat.style.fill = getRandomElement(WIZARD_COAT_COLOR);
+});
+
+// 4.  Изменение цвета глаз персонажа по нажатию. Цвет глаз волшебника
+// меняется по нажатию на блок .setup-wizard .wizard-eyes.
+setupWizardEyes.addEventListener('click', function () {
+  setupWizardEyes.style.fill = getRandomElement(WIZARD_EYES_COLOR);
 });
