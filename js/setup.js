@@ -70,8 +70,11 @@ var setupClose = setup.querySelector('.setup-close');
 var userNameInput = setup.querySelector('.setup-user-name');
 var setupWizard = setup.querySelector('.setup-wizard-appearance');
 var setupWizardCoat = setupWizard.querySelector('.wizard-coat');
+var setupInputWizardCoat = setupWizard.querySelector('input[name=coat-color]');
 var setupWizardEyes = setupWizard.querySelector('.wizard-eyes');
+var setupInputWizardEyes = setupWizard.querySelector('input[name=eyes-color]');
 var setupFireball = setup.querySelector('.setup-fireball-wrap');
+var setupInputFireball = setupFireball.querySelector('input[name=fireball-color]');
 
 var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE && evt.target !== userNameInput) {
@@ -155,18 +158,30 @@ userNameInput.addEventListener('input', function (evt) {
 // 3. Изменение цвета мантии персонажа по нажатию. Цвет мантии setup-wizard-appearance
 // .wizard-coat должен обновляться по нажатию на неё. Цвет мантии задаётся через
 // изменение инлайнового CSS-свойства fill для элемента.
+
+// Случайно изменяем цвет (с массива) переданного элемента itemName + передаём его значение в inputName
+var setWizardColor = function (arrayOfVariables, itemName, inputName) {
+  var randomElement = getRandomElement(arrayOfVariables);
+  inputName.value = randomElement;
+  if (itemName === setupFireball) { // в фаерболе меняем цвет background вместо fill
+    itemName.style.backgroundColor = randomElement;
+  } else {
+    itemName.style.fill = randomElement;
+  }
+};
+
 setupWizardCoat.addEventListener('click', function () {
-  setupWizardCoat.style.fill = getRandomElement(WIZARD_COAT_COLOR);
+  setWizardColor(WIZARD_COAT_COLOR, setupWizardCoat, setupInputWizardCoat);
 });
 
 // 4.  Изменение цвета глаз персонажа по нажатию. Цвет глаз волшебника
 // меняется по нажатию на блок .setup-wizard .wizard-eyes.
 setupWizardEyes.addEventListener('click', function () {
-  setupWizardEyes.style.fill = getRandomElement(WIZARD_EYES_COLOR);
+  setWizardColor(WIZARD_EYES_COLOR, setupWizardEyes, setupInputWizardEyes);
 });
 
 // 5.  Изменение цвета фаерболов по нажатию. Цвет задаётся через
 // изменение фона у блока .setup-fireball-wrap.
 setupFireball.addEventListener('click', function () {
-  setupFireball.style.background = getRandomElement(FIREBALL_BACKGROUND);
+  setWizardColor(FIREBALL_BACKGROUND, setupFireball, setupInputFireball);
 });
