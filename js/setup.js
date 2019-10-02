@@ -89,6 +89,7 @@ var openPopup = function () {
 var closePopup = function () {
   setup.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
+  setup.removeAttribute('style');
 };
 // Добавить обработчики для альтернативного ввода с
 // клавиатуры keydown для кнопок открытия/закрытия диалога настройки персонажа:
