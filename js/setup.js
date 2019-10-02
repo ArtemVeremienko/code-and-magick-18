@@ -16,8 +16,7 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template').c
 
 // Получение случайного элемента из массива
 var getRandomElement = function (array) {
-  var randomElement = array[Math.floor(array.length * Math.random())];
-  return randomElement;
+  return array[Math.floor(array.length * Math.random())];
 };
 
 var createWizard = function (name, surname, coatColor, eyesColor) {
@@ -161,12 +160,12 @@ userNameInput.addEventListener('input', function (evt) {
 
 // Случайно изменяем цвет (с массива) переданного элемента itemName + передаём его значение в inputName
 var setWizardColor = function (arrayOfVariables, itemName, inputName) {
-  var randomElement = getRandomElement(arrayOfVariables);
-  inputName.value = randomElement;
-  if (itemName === setupFireball) { // в фаерболе меняем цвет background вместо fill
-    itemName.style.backgroundColor = randomElement;
+  var randomItem = getRandomElement(arrayOfVariables);
+  inputName.value = randomItem;
+  if (itemName.tagName.toLowerCase() === 'div') { // в фаерболе меняем цвет background вместо fill
+    itemName.style.backgroundColor = randomItem;
   } else {
-    itemName.style.fill = randomElement;
+    itemName.style.fill = randomItem;
   }
 };
 
@@ -184,4 +183,56 @@ setupWizardEyes.addEventListener('click', function () {
 // изменение фона у блока .setup-fireball-wrap.
 setupFireball.addEventListener('click', function () {
   setWizardColor(FIREBALL_BACKGROUND, setupFireball, setupInputFireball);
+});
+
+// Добавить возможность передвигать диалог редактирования персонажа по экрану
+// Реализовать возможность добавления предметов из магазина в инвентарь
+var dialogHandler = setup.querySelector('.upload');
+
+dialogHandler.addEventListener('mousedown', function (evt) {
+  evt.preventDefault();
+
+  var startCoords = {
+    x: evt.clientX,
+    y: evt.clientY
+  };
+
+  var dragged = false;
+
+  var onMouseMove = function (moveEvt) {
+    moveEvt.preventDefault();
+    dragged = true;
+
+    var shift = {
+      x: startCoords.x - moveEvt.clientX,
+      y: startCoords.y - moveEvt.clientY
+    };
+
+    startCoords = {
+      x: moveEvt.clientX,
+      y: moveEvt.clientY
+    };
+
+    setup.style.top = (setup.offsetTop - shift.y) + 'px';
+    setup.style.left = (setup.offsetLeft - shift.x) + 'px';
+  };
+
+  var onMouseUp = function (upEvt) {
+    upEvt.preventDefault();
+
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+
+    if (dragged) {
+      var onClickPreventDefault = function (evtDrag) {
+        evtDrag.preventDefault();
+        dialogHandler.removeEventListener('click', onClickPreventDefault);
+      };
+
+      dialogHandler.addEventListener('click', onClickPreventDefault);
+    }
+  };
+
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
 });
