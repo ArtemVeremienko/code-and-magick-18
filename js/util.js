@@ -15,6 +15,11 @@
   var getRandomElement = function (array) {
     return array[Math.floor(array.length * Math.random())];
   };
+  // Удаление случайного элемента из массива и возврат его
+  var getDeleteElement = function (array) {
+    var random = Math.floor(array.length * Math.random());
+    return array.splice(random, 1)[0];
+  };
   // Экспорт нужных данных
   window.util = {
     WIZARD_NAMES,
@@ -60,7 +65,7 @@
     var fragment = document.createDocumentFragment();
 
     for (i = 0; i < 4; i++) {
-      var random = getRandomElement(wizards);
+      var random = getDeleteElement(wizards);
       fragment.appendChild(renderWizard(random));
     }
 
