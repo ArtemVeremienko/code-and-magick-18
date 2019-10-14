@@ -45,7 +45,6 @@
       } else {
         onError('Статус ответа сервера: ' + xhr.status + ' ' + xhr.statusText);
       }
-
     });
 
     xhr.addEventListener('error', function () {
@@ -55,6 +54,7 @@
       onError('Запрос не успел выполнится за ' + xhr.timeout + 'мс');
     });
 
+    xhr.timeout = 10000; // 10s
     xhr.open('POST', URL);
     xhr.send(data);
   };
