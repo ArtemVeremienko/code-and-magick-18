@@ -20,7 +20,7 @@
     }
 
     return rank;
-  }
+  };
 
   // Сортировка магов по имени (в случае когда ранк магов одинаков)
   var namesComparator = function (leftName, rightName) {
@@ -44,12 +44,12 @@
 
   window.wizard.onCoatChange = function (color) {
     coatColor = color;
-    updateFilter();
+    window.debounce(updateFilter)();
   };
 
   window.wizard.onEyesChange = function (color) {
     eyesColor = color;
-    updateFilter();
+    window.debounce(updateFilter)();
   };
 
   var successHandler = function (data) {
